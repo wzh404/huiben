@@ -1,0 +1,43 @@
+<view class="weui-search-bar">
+   <view class="weui-search-bar__form">
+    <view class="weui-search-bar__box">
+      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+      <input type="text" class="weui-search-bar__input" placeholder="请输入查询内容" value="{{wxSearchData.value}}" bindinput="wxSearchInput" bindconfirm="wxSearchConfirm" confirm-type='search'/>
+      <view class="weui-icon-clear" wx:if="{{wxSearchData.value.length > 0}}" bindtap="wxSearchClear">
+        <icon type="clear" size="14"></icon>
+      </view>
+    </view>
+  </view>    
+</view>
+
+<view class="wxSearch">
+  <view class="wxSearchInner">    
+    <view class="wxSearchKey" wx:if="{{wxSearchData.hotKeys[0]}}">
+      <text wx:if="{{wxSearchData.hotKeys[0]}}" class="wxSearchTitle" style="font-weight:bold">热门搜索</text>
+      <view class="wxSearchKeyList">
+        <block wx:for="{{wxSearchData.hotKeys}}" wx:key="{{index}}">
+          <view class="wxSearchKeyItem" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</view>
+        </block>
+      </view>
+    </view>
+
+    <view class="wxSearchHistoryItem" style="margin-top: 8px;height:20px">
+        <text class="wxSearchHistoryItemTitle" style="font-weight:bold">历史搜索</text>
+      </view>
+    <view wx:for-items="{{wxSearchData.his}}" wx:key="{{index}}" class="wxSearchHistory">
+      <view class="wxSearchHistoryItem">
+        <text class="wxSearchHistoryItemTitle">{{item}}</text>
+      </view>
+      <!-- 
+      <view class="wxSearchKeyList">
+        <block wx:for="{{wxSearchData.his}}">
+          <view class="wxSearchKeyItem" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</view>
+        </block>
+      </view>
+      -->
+    </view>
+    <view wx:if="{{sercherStorage.length!==0}}" style="text-align:center;" bindtap="clearSearchStorage">
+      <view class="history-span">清除历史搜索</view>
+    </view>
+  </view>
+</view>
